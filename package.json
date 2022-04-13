@@ -2,7 +2,7 @@
   "name": "reddit-clone",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,8 @@
   "homepage": "https://github.com/djaskulak/Reddit-clone#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.5"
+    "express-handlebars": "^6.0.5",
+    "express-validator": "^6.14.0",
+    "mongoose": "^6.2.11"
   }
 }
