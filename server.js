@@ -1,8 +1,11 @@
+require('dotenv').config();
 const express = require('express')
-const {engine} = require('express-handlebars');
-
+const cookieParser = require('cookie-parser');
 const app = express();
 
+const {engine} = require('express-handlebars');
+
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -15,6 +18,7 @@ require('./data/reddit-db');
 
 require('./controllers/posts')(app);
 require('./controllers/comments.js')(app);
+require('./controllers/auth.js')(app);
 
 app.listen(3000);
 
