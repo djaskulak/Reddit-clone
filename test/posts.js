@@ -2,7 +2,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { describe, it } = require('mocha');
-const agent = chai.request.agent(app);
+// const User = require('../models/user');
 
 // Import the Post model from our models folder so we
 // we can use it in our tests.
@@ -10,6 +10,7 @@ const Post = require('../models/post');
 const app = require('../server');
 
 const should = chai.should();
+const agent = chai.request.agent(app);
 
 chai.use(chaiHttp);
 
@@ -20,7 +21,8 @@ describe('Posts', function () {
     url: 'https://www.google.com',
     summary: 'post summary'
   };
-  it('Should create with valid attributes at POST /posts/new', function(done) {
+  
+  it('Should create with valid attributes at POST /posts/new', function (done) {
     // Checks how many posts there are now
     Post.estimatedDocumentCount()
       .then(function (initialDocCount) {
@@ -52,7 +54,11 @@ describe('Posts', function () {
         done(err);
       });
   });
-  after(function () {
-    Post.findOneAndDelete(newPost);
+  after(function (done) {
+    Post.findOneAndDelete(newPost)
+
+      .catch(function (err) {
+        done(err);
+      });
   });
 });

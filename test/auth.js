@@ -1,4 +1,3 @@
-// test/auth.js
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const { describe, it } = require('mocha');
@@ -23,7 +22,7 @@ describe('User', function () {
 
   // signup
   it('should be able to signup', function (done) {
-    User.findOneAndRemove({ username: 'testone' }, function() {
+    User.findOneAndRemove({ username: 'testone' }, function () {
       agent
         .post('/sign-up')
         .send({ username: 'testone', password: 'password' })
@@ -36,6 +35,26 @@ describe('User', function () {
     });
   });
 
+  // login
+  it('should be able to login', function (done) {
+    agent
+      .post('/login')
+      .send({ username: 'testone', password: 'password' })
+      .end(function (err, res) {
+        res.should.have.status(200);
+        agent.should.have.cookie('nToken');
+        done();
+      });
+});
+
+  // logout
+  it('should be able to logout', function (done) {
+    agent.get('/logout').end(function (err, res) {
+      res.should.have.status(200);
+      agent.should.not.have.cookie('nToken');
+      done();
+    });
+  });
   after(function () {
     agent.close();
   });
