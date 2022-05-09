@@ -5,7 +5,9 @@ const postSchema = new Schema({
   url: { type: String, required: true },
   summary: { type: String, required: true },
   subreddit: { type: String, required: true },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
 });
 
 module.exports = model('Post', postSchema);
