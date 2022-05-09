@@ -29,6 +29,16 @@ module.exports = (app) => {
     res.render('posts-new', {})
   })
 
+  // LOOK UP THE POST
+  app.get('/posts/:id', (req, res) => {
+    Post
+      .findById(req.params.id).lean().populate('comments')
+      .then((post) => res.render('posts-show', { post }))
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+
   // SUBREDDIT
   app.get('/n/:subreddit', (req, res) => {
     Post.find({ subreddit: req.params.subreddit }).lean()

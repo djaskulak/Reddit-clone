@@ -14,6 +14,7 @@ app.set('views', './views');
 require('./data/reddit-db');
 
 require('./controllers/posts')(app);
+require('./controllers/comments.js')(app);
 
 app.listen(3000);
 
