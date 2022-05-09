@@ -49,7 +49,7 @@ describe('Posts', function () {
           });
       })
       .catch(function (err) {
-          done(err);
+        done(err);
       });
   });
   after(function () {
