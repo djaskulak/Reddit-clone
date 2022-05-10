@@ -8,6 +8,7 @@ const {engine} = require('express-handlebars');
 
 app.use(cookieParser());
 app.use(checkAuth);
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
